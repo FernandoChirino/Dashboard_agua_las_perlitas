@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <style>
+        th, td {
+            padding: 6px 14px; /* vertical | horizontal spacing */
+            text-align: left;
+        }
+    </style>
+    {% if lecturas %}
+        <table>
+            <tr>
+                <th>id</th>
+                <th>fecha</th>
+                <th>Hora</th>
+                <th>lote</th>
+                <th>punto de muestreo</th>
+                <th>tecnico</th>
+                <th>observaciones</th>
+                {% for v in lecturas[0].valores %}
+                    <th>
+                        {{v.parametro}}
+                    </th>
+                {% endfor %}
+            </tr>
+            {% for lectura in lecturas %}
+            <tr>
+                <td>{{ lectura.id }}</td>
+                <td>{{ lectura.fecha }}</td>
+                <td>{{ lectura.hora }}</td>
+                <td>{{ lectura.lote }}</td>
+                <td>{{ lectura.punto_de_muestreo }}</td>
+                <td>{{ lectura.tecnico }}</td>
+                <td>{{ lectura.observaciones }}</td>
+                {% for v in lectura.valores %}
+                    <td>
+                        {{v.valor}} {% if not v.dentro_de_rango %} X {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h1>No hay lecturas</h1>
+    {% endif %}
+</body>
+</html>
