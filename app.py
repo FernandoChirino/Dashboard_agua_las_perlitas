@@ -30,7 +30,8 @@ def dashboard():
     JOIN puntos_muestreo pm ON pm.id = l.punto_muestreo_id
     JOIN usuarios u ON u.id = l.tecnico_id
     LEFT JOIN lectura_valores lv ON lv.lectura_id = l.id
-    LEFT JOIN parametros p ON p.id = lv.parametro_id;
+    LEFT JOIN parametros p ON p.id = lv.parametro_id
+    ORDER BY l.id, p.id;
     
     """
     )
